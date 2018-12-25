@@ -1,34 +1,35 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		List<Integer> intList = new ArrayList<>();
-		intList.add(10);
-		intList.add(5);
-		
-		List<? extends Number> list = intList;
-		
-		Number x = list.get(0);
-		
-		list.add(20);
-		
-		 ///////////////////////////////////////////////////////////////////
-		
+		List<Integer> myInts = Arrays.asList(1, 2, 3, 4);
+		List<Double> myDoubles = Arrays.asList(3.14, 6.28);
 		
 		List<Object> myObjs = new ArrayList<>();
-		myObjs.add("Maria");
-		myObjs.add("Alex");
 		
-		List<? super Number> myNums = myObjs;
+		copy(myInts, myObjs);
+		copy(myDoubles, myObjs);
 		
-		myNums.add(10);
-		myNums.add(3.14);
+		System.out.println("LIST");
+		printList(myObjs);
+	}
+	
+	public static void copy(List<? extends Number> source, List<? super Number> target) {
+		for(Number number : source) {
+			target.add(number);
+		}
 		
-		Number x = myNums.get(0);
+	}
+	
+	public static void printList(List<?> list) {
+		for(Object obj : list) {
+			System.out.println(obj);
+		}
 	}
 }
